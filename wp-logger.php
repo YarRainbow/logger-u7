@@ -1,14 +1,23 @@
 <?php
 /*
-Plugin Name: WP Logger
-Description: Logging and debug events and vars on site. For adding var in log use hook: <br><code>do_action("logger_u7", $var);</code>
-Author: WPCraft & Hokoo
+Plugin Name: WP Data Logger
+Description: Logging and debug events and vars on site. For adding data in log use the hook: <br><code>do_action( 'logger', $data );</code>
+Author: WPCraft & Nebster
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Version: 1.3
 */
 
-class Logger_U7{
+if( ! class_exists( 'LoggerU7' ) ){ class LoggerU7{
+	
+	protected static $instance;
+	
+	public static function instance(){
+		if ( is_null( self::$instance ) ) {
+			self::$instance = new self();
+		}
+		return self::$instance;
+	}
 
 	function __construct(){
 		add_action('admin_menu', function(){
@@ -22,19 +31,19 @@ class Logger_U7{
 		});
 
 		add_filter( "plugin_action_links_" . plugin_basename( __FILE__ ), array($this, 'add_settings_link') );
-		add_action( 'wp_ajax_logger_clear_log', array($this, 'clear_log') );
+		add_action( 'wp_ajax_LoggerClearLog', array($this, 'clear_log') );
 		add_action('logger', array($this, 'add'));
 	}
 
 	function display_page(){
 
 		echo '<h1>Log</h1>';
-		echo '<p>For adding data to log use hook: <br><pre>do_action("logger", $var);</pre></p>';
+		echo '<p>For adding data to log use the hook: <code>do_action( \'logger\', $data );</code></p>';
 		echo '<a class="button clear_log" href="">Clear Log</a><hr>';
 
 		$data = get_option('logger_u7');
 		if( ! is_array($data)){
-			echo '<p>No data in log</p>';
+			echo '<p>These is no data in the log</p>';
 			return;
 		}
 
@@ -70,7 +79,7 @@ class Logger_U7{
 			jQuery.post( 
 				'<?php echo get_admin_url() ?>/admin-ajax.php',
 				{
-					action : 'logger_clear_log'
+					action : 'LoggerClearLog'
 				},
 				function( response ){
 					response = JSON.parse( response );
@@ -123,4 +132,4 @@ class Logger_U7{
 	}
 }
 
-new Logger_U7;
+LoggerU7::instance(); }
