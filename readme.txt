@@ -1,5 +1,6 @@
-=== Logger ===
-Tags: wordpress, woocommerce, logger, log, debug
+=== WP Logger ===
+Tags: logger, log, debug, logging data, data logger
+Contributors: hokku, casepress
 Requires at least: 4.0
 Tested up to: 4.9
 Stable tag: 4.3
@@ -21,10 +22,10 @@ This section describes how to install the plugin and get it working.
 
 e.g.
 
-1. Upload plugin to the `/wp-content/plugins/` directory
+0. Upload plugin to the `/wp-content/plugins/` directory
 1. Activate the plugin through the 'Plugins' menu in WordPress
-1. Go to Tools / Logger
-1. Insert hook
+2. Insert the hook <code>do_action( 'logger', $data );</code> in your code
+3. Go to Tools > Logger 
 
 == Frequently Asked Questions ==
 
