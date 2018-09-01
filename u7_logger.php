@@ -1,9 +1,8 @@
 <?php
 /*
-Plugin Name: Logger by U7
+Plugin Name: WP Logger
 Description: Logging and debug events and vars on site. For adding var in log use hook: <br><code>do_action("logger_u7", $var);</code>
-Author: WPCraft
-Author URI: https://wpcraft.ru/
+Author: WPCraft & Hokoo
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Version: 1.3
