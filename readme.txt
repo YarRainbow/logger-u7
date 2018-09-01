@@ -1,4 +1,4 @@
-=== Logger U7 ===
+=== Logger ===
 Tags: wordpress, woocommerce, logger, log, debug
 Requires at least: 4.0
 Tested up to: 4.9
