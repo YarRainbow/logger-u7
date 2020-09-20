@@ -3,9 +3,9 @@ Contributors: hokku,casepress
 Tags: logger,wp logger,log,debug,data logging,data logger,wp data logger,develop
 Donate link: https://www.paypal.me/hokku
 Requires at least: 3.5
-Tested up to: 5.3
+Tested up to: 5.5
 Requires PHP: 5.6
-Stable tag: 2.0.1
+Stable tag: 2.0.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -38,9 +38,11 @@ Logger vars and event for debug site and apps.
 1. Logger page
 
 == Changelog ==
+= 2.0.2 =
+* Suppress DB errors while the data insert
 
 = 2.0.1 =
-* bug fix
+* bug fixed
 
 = 2.0 =
 * Logged data was moved to custom table in DB

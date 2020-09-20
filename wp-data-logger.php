@@ -5,11 +5,11 @@ Description: Logging and debug events and vars on site. For adding data in log u
 Author: WPCraft & iTRON
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Version: 2.0.1
+Version: 2.0.2
 */
 
 define( 'WPDL_PLUGIN_NAME', plugin_basename( __FILE__ ) );
-define( 'WPDL_VERSION', '2.0.1' );
+define( 'WPDL_VERSION', '2.0.2' );
 
 require_once ABSPATH . 'wp-admin/includes/upgrade.php';
 require_once __DIR__ . '/class-wp-data-logger.php';
