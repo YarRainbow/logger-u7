@@ -74,6 +74,7 @@ class WP_Data_Logger{
 		DEFAULT CHARACTER SET {$wpdb->charset} COLLATE {$wpdb->collate};";
 
 		dbDelta( $query );
+		return true;
 	}
 	
 	public function remove_old_data(){
@@ -100,7 +101,9 @@ class WP_Data_Logger{
 				
 				'<a class="button clear_log button-link-delete" href="" data-status="all">Clear Log</a>' ;
 
+		$suppress = $wpdb->suppress_errors( true );
 		$data = $wpdb->get_results( 'SELECT * FROM '. self::$table_name . ' ORDER BY ID DESC LIMIT ' . $limit, ARRAY_A );
+		$wpdb->suppress_errors( $suppress );
 		if ( empty( $data ) || ! is_array( $data ) ):
 			echo '<p>There is no data in the log</p>';
 			return;
@@ -149,11 +152,16 @@ class WP_Data_Logger{
 
 	function add( $data = '', $status = 'info' ){
 		global $wpdb;
-		
-		$wpdb->insert( 
-			self::$table_name,
-			array( 'status' => $status, 'content' => maybe_serialize( $data ) )
-		);
+        $suppress = $wpdb->suppress_errors( true );
+        $i = 0;
+		do{
+			$result = $wpdb->insert(
+				self::$table_name,
+				array( 'status' => $status, 'content' => maybe_serialize( $data ) )
+			);
+		} while( empty( $result ) && $this->db_delta() && $i++ < 1 );
+		$wpdb->suppress_errors( $suppress );
+		if ( empty( $result) ) error_log( '[WP DATA LOGGER] Error while DB table creating' );
 	}
 
 	/**
